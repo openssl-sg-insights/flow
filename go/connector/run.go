@@ -124,6 +124,9 @@ func Run(
 		// Mount the connector-proxy binary, as well as the output of inspecting the docker image.
 		"--mount", fmt.Sprintf("type=bind,source=%s,target=/flow-connector-proxy", tmpProxy.Name()),
 		"--mount", fmt.Sprintf("type=bind,source=%s,target=/image-inspect.json", tmpInspect.Name()),
+		// Cgroups mem/cpu resource limits.
+		"--memory", "1g",
+		"--cpus", "2",
 		image,
 		// Arguments following `image` are arguments of the connector proxy and not of docker:
 		"--image-inspect-json-path=/image-inspect.json",
